@@ -5,10 +5,11 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
+
 function Index({ navigation }) {
   return (
     <View>
-      <Text>Shift</Text>
+      <Text>Um Sonho Sem Nome</Text>
     </View>
   )
 }
@@ -29,13 +30,19 @@ function Lista() {
   )
 }
 
+
+
 function Test_1({ navigation }){
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Teste</Text>
       <Image source={require('./../../assets/test/test_1.png')} style={{width: 300, height: 200}} />
+      <Text style={styles.text}>Este é Jonas.</Text>
       <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Test_2')} >
         <Text>proximo</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Test_3')} >
+        <Text>voltar</Text>
       </TouchableOpacity>
     </View>
   )
@@ -46,6 +53,7 @@ function Test_2({ navigation }){
     <View style={styles.container}>
       <Text style={styles.title}>Teste</Text>
       <Image source={require('./../../assets/test/test_2.png')} style={{width: 300, height: 200}} />
+      <Text style={styles.text}>Este é Carlos.</Text>
       <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Test_3')} >
         <Text>proximo</Text>
       </TouchableOpacity>
@@ -58,6 +66,8 @@ function Test_3({ navigation }){
     <View style={styles.container}>
       <Text style={styles.title}>Teste</Text>
       <Image source={require('./../../assets/test/test_3.gif')} style={{width: 300, height: 200}} />
+      <Text style={styles.text}>Eles gostam platonicamente um do outro.</Text>
+      <Text style={styles.text}>Fim</Text>
     </View>
   )
 }
@@ -65,9 +75,9 @@ function Test_3({ navigation }){
 function Test(){
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Test_1" component={Test_1} />
-      <Stack.Screen name="Test_2" component={Test_2} />
-      <Stack.Screen name="Test_3" component={Test_3} />
+      <Stack.Screen name="Test_1" component={Test_1} options={{ headerShown: false }}/>
+      <Stack.Screen name="Test_2" component={Test_2} options={{ headerShown: false }}/>
+      <Stack.Screen name="Test_3" component={Test_3} options={{ headerShown: false }}/>
     </Stack.Navigator>
   )
 }
@@ -100,9 +110,19 @@ const styles = StyleSheet.create({
     backgroundColor:'#F8BD2D', 
     padding:12, 
     borderRadius:8,  
-    alignItems:'end',
+    alignSelf: 'flex-end',
     margin: 10 
   },
+  btn_page: {
+    backgroundColor:'rgba(0, 0, 0, 0)', 
+    padding:12, 
+    borderRadius:8,  
+    alignSelf: 'flex-end',
+    margin: 10 
+  },
+  text: {
+    padding: 10
+  }
 });
 
 export default App;
