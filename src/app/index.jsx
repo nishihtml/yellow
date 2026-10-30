@@ -30,8 +30,6 @@ function Lista() {
   )
 }
 
-
-
 function Test_1({ navigation }){
   return (
     <View style={styles.container}>
@@ -79,6 +77,22 @@ function Test(){
       <Stack.Screen name="Test_2" component={Test_2} options={{ headerShown: false }}/>
       <Stack.Screen name="Test_3" component={Test_3} options={{ headerShown: false }}/>
     </Stack.Navigator>
+  )
+}
+
+function Creditos() {
+  return (
+    <View>
+      <Text>a</Text>
+    </View>
+  )
+}
+
+function Lista() {
+  return (
+    <View>
+      <Text>a</Text>
+    </View>
   )
 }
 
