@@ -5,27 +5,10 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
-
 function Index({ navigation }) {
   return (
-    <View>
-      <Text>Um Sonho Sem Nome</Text>
-    </View>
-  )
-}
-
-function Creditos() {
-  return (
-    <View>
-      <Text>a</Text>
-    </View>
-  )
-}
-
-function Lista() {
-  return (
-    <View>
-      <Text>a</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>um sonho sem nome</Text>
     </View>
   )
 }
@@ -39,9 +22,14 @@ function Test_1({ navigation }){
       <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Test_2')} >
         <Text>proximo</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Test_3')} >
-        <Text>voltar</Text>
-      </TouchableOpacity>
+      <View style={styles.btn_container}>
+        <TouchableOpacity style={styles.btn_page} onPress={() => navigation.navigate('Home')} >
+          <Text>voltar</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.btn_page} onPress={() => navigation.navigate('Test_1')} >
+          <Text>ir pro início</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   )
 }
@@ -55,6 +43,14 @@ function Test_2({ navigation }){
       <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Test_3')} >
         <Text>proximo</Text>
       </TouchableOpacity>
+      <View style={styles.btn_container}>
+        <TouchableOpacity style={styles.btn_page} onPress={() => navigation.navigate('Test_1')} >
+          <Text>voltar</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.btn_page} onPress={() => navigation.navigate('Test_1')} >
+          <Text>ir pro início</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   )
 }
@@ -64,8 +60,16 @@ function Test_3({ navigation }){
     <View style={styles.container}>
       <Text style={styles.title}>Teste</Text>
       <Image source={require('./../../assets/test/test_3.gif')} style={{width: 300, height: 200}} />
-      <Text style={styles.text}>Eles gostam platonicamente um do outro.</Text>
+      <Text style={styles.text}>Eles amam platonicamente um do outro.</Text>
       <Text style={styles.text}>Fim</Text>
+      <View style={styles.btn_container}>
+        <TouchableOpacity style={styles.btn_page} onPress={() => navigation.navigate('Test_2')} >
+          <Text>voltar</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.btn_page} onPress={() => navigation.navigate('Test_1')} >
+          <Text>ir pro início</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   )
 }
@@ -100,7 +104,7 @@ function App() {
   return (
     <NavigationContainer>
       <Drawer.Navigator>
-        <Drawer.Screen name="Index" component={Index} />
+        <Drawer.Screen name="Home" component={Index} />
         <Drawer.Screen name="Teste" component={Test} />        
       </Drawer.Navigator>
     </NavigationContainer>
@@ -112,8 +116,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#ecf0f1',
+    backgroundColor: '#F8BD2D',
     padding: 8
+  },
+  btn_container:{
+    flexDirection: 'row'
   },
   title:{
     fontSize: 30,
@@ -121,18 +128,20 @@ const styles = StyleSheet.create({
     paddingBottom: 20
   },
   btn: { 
-    backgroundColor:'#F8BD2D', 
-    padding:12, 
+    backgroundColor:'#F08400', 
+    padding: 12, 
     borderRadius:8,  
     alignSelf: 'flex-end',
     margin: 10 
   },
   btn_page: {
-    backgroundColor:'rgba(0, 0, 0, 0)', 
-    padding:12, 
-    borderRadius:8,  
-    alignSelf: 'flex-end',
-    margin: 10 
+    backgroundColor:'#F08400', 
+    paddingRight: 10,
+    paddingLeft: 10,
+    padddingTop: 5,
+    paddingBottom: 5,
+    margin: 10,
+    borderRadius: 5
   },
   text: {
     padding: 10
