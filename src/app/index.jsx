@@ -1,9 +1,30 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { useState } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import firebase from './../../config/config.js';
+
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
+
+function SalvarPagina(pag){
+  firebase.database().ref("/pagina").push({
+    pagina: pag,
+  })
+    alert("item salvo")
+}
+
+function SalvarPagina(nom){
+  firebase.database().ref("/nome").push({
+    nome: nom,
+  })
+    alert("item salvo")
+}
+
+let [pagina, setPagina] = useState();
+let [nome, setNome] = useState();
+
 
 function Index({ navigation }) {
   return (
