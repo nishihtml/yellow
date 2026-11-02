@@ -29,7 +29,7 @@ let [nome, setNome] = useState();
 function Index({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>um sonho sem nome</Text>
+      <Text style={styles.title}>UM SONHO SEM NOME</Text>
     </View>
   )
 }
