@@ -1,30 +1,12 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { useState } from 'react';
+//import { useState } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import firebase from './../../config/config.js';
+//import firebase from './../../config/config.js';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
-
-function SalvarPagina(pag){
-  firebase.database().ref("/pagina").push({
-    pagina: pag,
-  })
-    alert("item salvo")
-}
-
-function SalvarPagina(nom){
-  firebase.database().ref("/nome").push({
-    nome: nom,
-  })
-    alert("item salvo")
-}
-
-let [pagina, setPagina] = useState();
-let [nome, setNome] = useState();
-
 
 function Index({ navigation }) {
   return (
@@ -38,7 +20,7 @@ function Test_1({ navigation }){
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Teste</Text>
-      <Image source={require('./../../assets/test/test_1.png')} style={{width: 300, height: 200}} />
+      <Image source={require('./../../assets/test/test_1.png')} style={styles.image} />
       <Text style={styles.text}>Este é Jonas.</Text>
       <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Test_2')} >
         <Text>proximo</Text>
@@ -59,7 +41,7 @@ function Test_2({ navigation }){
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Teste</Text>
-      <Image source={require('./../../assets/test/test_2.png')} style={{width: 300, height: 200}} />
+      <Image source={require('./../../assets/test/test_2.png')} style={styles.image} />
       <Text style={styles.text}>Este é Carlos.</Text>
       <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Test_3')} >
         <Text>proximo</Text>
@@ -80,7 +62,7 @@ function Test_3({ navigation }){
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Teste</Text>
-      <Image source={require('./../../assets/test/test_3.gif')} style={{width: 300, height: 200}} />
+      <Image source={require('./../../assets/test/test_3.gif')} style={styles.image} />
       <Text style={styles.text}>Eles amam platonicamente um do outro.</Text>
       <Text style={styles.text}>Fim</Text>
       <View style={styles.btn_container}>
@@ -107,15 +89,23 @@ function Test(){
 
 function Creditos() {
   return (
-    <View>
+    <View style={styles.container}>
       <Text>a</Text>
     </View>
   )
 }
 
-function Lista() {
+function Paginas() {
   return (
-    <View>
+    <View style={styles.container}>
+      <Text>a</Text>
+    </View>
+  )
+}
+
+function Galeria() {
+  return (
+    <View style={styles.container}>
       <Text>a</Text>
     </View>
   )
@@ -126,7 +116,10 @@ function App() {
     <NavigationContainer>
       <Drawer.Navigator>
         <Drawer.Screen name="Home" component={Index} />
-        <Drawer.Screen name="Teste" component={Test} />        
+        <Drawer.Screen name="Teste" component={Test} />
+        <Drawer.Screen name="Páginas" component={Paginas} /> 
+        <Drawer.Screen name="Créditos" component={Creditos} /> 
+        <Drawer.Screen name="Galeria" component={Galeria} />       
       </Drawer.Navigator>
     </NavigationContainer>
   );
@@ -157,15 +150,17 @@ const styles = StyleSheet.create({
   },
   btn_page: {
     backgroundColor:'#F08400', 
-    paddingRight: 10,
-    paddingLeft: 10,
-    padddingTop: 5,
-    paddingBottom: 5,
+    padding: 10,
     margin: 10,
     borderRadius: 5
   },
   text: {
     padding: 10
+  },
+  image: {
+    width: 300,
+    height: 200,
+    marginBottom: 10
   }
 });
 
