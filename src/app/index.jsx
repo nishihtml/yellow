@@ -2,21 +2,55 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 //import { useState } from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-//import firebase from './../../config/config.js';
-import { Card, Paragraph } from 'react-native-paper';
+import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import firebase from './../../config/config.js';
+//import { Card, Paragraph } from 'react-native-paper';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
+
+let [nome, setNome] = useState('')
+let [pag, setPag] = useState('')
+
+function Salvar() {
+  firebase.database().ref('/comic').push ({
+    nome: nome,
+    pag: pag,
+  })
+    alert("Salvo!")
+}
 
 function Index({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>UM SONHO SEM NOME</Text>
-      <Image source={require('./../../assets/test/test_1.png')} style={styles.image} />
+      <Image source={require('./../../assets/comic/page001.png')} style={styles.image} />
       <TouchableOpacity style={styles.btn_home} onPress={() => navigation.navigate('Teste')} >
         <Text style={styles.text_btn}>COMEÇAR</Text>
       </TouchableOpacity>
+    </View>
+  )
+}
+
+function Page001({ navigation }){
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Teste</Text>
+      <Image source={require('./../../assets/comic/page001.png')} style={styles.image} />
+      <Text style={styles.text}>Você é uma garota dormindo em seu quarto. Apesar de ter 15 anos, você ainda não tem um nome</Text>
+      <Text style={styles.text}>Decida um novo nome pra você</Text>
+      <TextInput style={styles.input} placeholder="hora" onChangeText={setNome} />
+      <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Test_2')} >
+        <Text>proximo</Text>
+      </TouchableOpacity>
+      <View style={styles.btn_container}>
+        <TouchableOpacity style={styles.btn_page} onPress={() => navigation.navigate('Home')} >
+          <Text>voltar</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.btn_page} onPress={() => navigation.navigate('Test_1')} >
+          <Text>ir pro início</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   )
 }
@@ -96,12 +130,8 @@ function Creditos() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Créditos</Text>
-      <Card>
-          <Card.Title title="Gustavo Yuri Nishi"  />
-          <Card.Content>
-            <Paragraph>{'Historia, arte e programação'}</Paragraph>
-          </Card.Content>
-      </Card>
+      <Image source={require('./../../assets/test/test_1.png')} style={styles.image} />
+      <Text>Gustavo Yuri Nishi</Text>
     </View>
   )
 }
@@ -170,7 +200,7 @@ const styles = StyleSheet.create({
     padding: 5,
     margin: 10,
     borderRadius: 5,
-    width: 100,
+    width: 160,
   },
   text: {
     padding: 10
