@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 //import { useState } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 //import firebase from './../../config/config.js';
+import { Card, Paragraph } from 'react-native-paper';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -12,6 +13,10 @@ function Index({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>UM SONHO SEM NOME</Text>
+      <Image source={require('./../../assets/test/test_1.png')} style={styles.image} />
+      <TouchableOpacity style={styles.btn_home} onPress={() => navigation.navigate('Teste')} >
+        <Text style={styles.text_btn}>COMEÇAR</Text>
+      </TouchableOpacity>
     </View>
   )
 }
@@ -42,7 +47,7 @@ function Test_2({ navigation }){
     <View style={styles.container}>
       <Text style={styles.title}>Teste</Text>
       <Image source={require('./../../assets/test/test_2.png')} style={styles.image} />
-      <Text style={styles.text}>Este é Carlos.</Text>
+      <Text style={styles.text}>E esse é Carlos.</Text>
       <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Test_3')} >
         <Text>proximo</Text>
       </TouchableOpacity>
@@ -90,7 +95,13 @@ function Test(){
 function Creditos() {
   return (
     <View style={styles.container}>
-      <Text>a</Text>
+      <Text style={styles.title}>Créditos</Text>
+      <Card>
+          <Card.Title title="Gustavo Yuri Nishi"  />
+          <Card.Content>
+            <Paragraph>{'Historia, arte e programação'}</Paragraph>
+          </Card.Content>
+      </Card>
     </View>
   )
 }
@@ -150,16 +161,27 @@ const styles = StyleSheet.create({
   },
   btn_page: {
     backgroundColor:'#F08400', 
-    padding: 10,
+    padding: 5,
     margin: 10,
     borderRadius: 5
+  },
+  btn_home: {
+    backgroundColor:'#F08400', 
+    padding: 5,
+    margin: 10,
+    borderRadius: 5,
+    width: 100,
   },
   text: {
     padding: 10
   },
+  text_btn: {
+    fontSize: 25,
+    textAlign: 'center',
+  },
   image: {
     width: 300,
-    height: 200,
+    height: 225,
     marginBottom: 10
   }
 });
