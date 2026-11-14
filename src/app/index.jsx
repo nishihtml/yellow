@@ -1,57 +1,90 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-//import { useState } from 'react';
-import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import firebase from './../../config/config.js';
+import { Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import firebase from './config/config.js';
 //import { Card, Paragraph } from 'react-native-paper';
+
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
-let [nome, setNome] = useState('')
-let [pag, setPag] = useState('')
-
-function Salvar() {
+function Salvar(n, p) {
   firebase.database().ref('/comic').push ({
-    nome: nome,
-    pag: pag,
+    nome: n,
+    pag: p,
   })
     alert("Salvo!")
 }
 
 function Index({ navigation }) {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>UM SONHO SEM NOME</Text>
-      <Image source={require('./../../assets/comic/page001.png')} style={styles.image} />
-      <TouchableOpacity style={styles.btn_home} onPress={() => navigation.navigate('Teste')} >
-        <Text style={styles.text_btn}>COMEÇAR</Text>
-      </TouchableOpacity>
-    </View>
+    <ScrollView style={styles.container}>
+      <View style={styles.container}>
+        <Text style={styles.title}>UM SONHO SEM NOME</Text>
+        <Image source={require('./assets/comic/page001.png')} style={styles.image} />
+        <TouchableOpacity style={styles.btn_home} onPress={() => navigation.navigate('UM SONHO SEM NOME')} >
+          <Text style={styles.text_btn}>COMEÇAR</Text>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>  
   )
 }
 
 function Page001({ navigation }){
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Teste</Text>
-      <Image source={require('./../../assets/comic/page001.png')} style={styles.image} />
-      <Text style={styles.text}>Você é uma garota dormindo em seu quarto. Apesar de ter 15 anos, você ainda não tem um nome</Text>
-      <Text style={styles.text}>Decida um novo nome pra você</Text>
-      <TextInput style={styles.input} placeholder="hora" onChangeText={setNome} />
-      <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Test_2')} >
-        <Text>proximo</Text>
-      </TouchableOpacity>
-      <View style={styles.btn_container}>
-        <TouchableOpacity style={styles.btn_page} onPress={() => navigation.navigate('Home')} >
-          <Text>voltar</Text>
+    <ScrollView style={styles.container}>
+      <View style={styles.container}>
+        <Text style={styles.title}>UM SONHO SEM NOME</Text>
+        <Image source={require('./assets/comic/page001.png')} style={styles.image} />
+        <Text style={styles.text}>Você é uma garota dormindo em seu quarto. Apesar de ter 15 anos, você ainda não tem um nome.</Text>
+        <Text style={styles.text}>Decida um novo nome pra você.</Text>
+        <TextInput style={styles.input} />
+        <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Página 2')} >
+          <Text>Acordar</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.btn_page} onPress={() => navigation.navigate('Test_1')} >
-          <Text>ir pro início</Text>
-        </TouchableOpacity>
+        <View style={styles.btn_container}>
+          <TouchableOpacity style={styles.btn_page} onPress={() => navigation.navigate('Home')} >
+            <Text>voltar</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.btn_page} onPress={() => navigation.navigate('Página 1')} >
+            <Text>ir pro início</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </ScrollView>
+  )
+}
+
+function Page002({ navigation }){
+  return (
+    <ScrollView style={styles.container}>
+      <View style={styles.container}>
+        <Text style={styles.title}>Acordar</Text>
+        <Image source={require('./assets/comic/page002.png')} style={styles.image} />
+        <Text style={styles.text}>Seu nome é Misaki</Text>
+        <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Página 2')} >
+          <Text>proximo</Text>
+        </TouchableOpacity>
+        <View style={styles.btn_container}>
+          <TouchableOpacity style={styles.btn_page} onPress={() => navigation.navigate('Página 1')} >
+            <Text>voltar</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.btn_page} onPress={() => navigation.navigate('Página 1')} >
+            <Text>ir pro início</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </ScrollView>  
+  )
+}
+
+function UmSonhoSemNome(){
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Página 1" component={Page001} options={{ headerShown: false }}/>
+      <Stack.Screen name="Página 2" component={Page002} options={{ headerShown: false }}/>
+    </Stack.Navigator>
   )
 }
 
@@ -59,7 +92,7 @@ function Test_1({ navigation }){
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Teste</Text>
-      <Image source={require('./../../assets/test/test_1.png')} style={styles.image} />
+      <Image source={require('./assets/test/test_1.png')} style={styles.image} />
       <Text style={styles.text}>Este é Jonas.</Text>
       <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Test_2')} >
         <Text>proximo</Text>
@@ -80,7 +113,7 @@ function Test_2({ navigation }){
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Teste</Text>
-      <Image source={require('./../../assets/test/test_2.png')} style={styles.image} />
+      <Image source={require('./assets/test/test_2.png')} style={styles.image} />
       <Text style={styles.text}>E esse é Carlos.</Text>
       <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Test_3')} >
         <Text>proximo</Text>
@@ -130,7 +163,7 @@ function Creditos() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Créditos</Text>
-      <Image source={require('./../../assets/test/test_1.png')} style={styles.image} />
+      <Image source={require('./assets/misc/gustavo.jpg')} style={styles.image} />
       <Text>Gustavo Yuri Nishi</Text>
     </View>
   )
@@ -157,10 +190,11 @@ function App() {
     <NavigationContainer>
       <Drawer.Navigator>
         <Drawer.Screen name="Home" component={Index} />
-        <Drawer.Screen name="Teste" component={Test} />
+        <Drawer.Screen name="UM SONHO SEM NOME" component={UmSonhoSemNome} />
         <Drawer.Screen name="Páginas" component={Paginas} /> 
         <Drawer.Screen name="Créditos" component={Creditos} /> 
-        <Drawer.Screen name="Galeria" component={Galeria} />       
+        <Drawer.Screen name="Galeria" component={Galeria} /> 
+        <Drawer.Screen name="Teste" component={Test} />      
       </Drawer.Navigator>
     </NavigationContainer>
   );
@@ -172,7 +206,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#F8BD2D',
-    padding: 8
+    padding: 8,
+    textAlign: 'center'
+  },
+  scroll: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: "100%",
+    backgroundColor:'#F8BD2D', 
   },
   btn_container:{
     flexDirection: 'row'
@@ -203,7 +245,8 @@ const styles = StyleSheet.create({
     width: 160,
   },
   text: {
-    padding: 10
+    padding: 10,
+    textAlign: 'center'
   },
   text_btn: {
     fontSize: 25,
@@ -213,6 +256,13 @@ const styles = StyleSheet.create({
     width: 300,
     height: 225,
     marginBottom: 10
+  },
+  input: {  
+    borderWidth: 1, 
+    borderRadius: 3, 
+    padding: 8, 
+    width: 150,
+    backgroundColor: '#FFFFFF'
   }
 });
 
