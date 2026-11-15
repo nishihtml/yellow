@@ -2,23 +2,42 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import './components/font.js';
 import firebase from './config/config.js';
-//import { Card, Paragraph } from 'react-native-paper';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
+let comic = []
 
-function GetPage() {
-  firebase.database().ref("notebooks").orderByChild("pag").once('value', snapshot => {
+function GetPagina() {
+  firebase.database().ref("comic").once('value', snapshot => {
     let data = snapshot.val();
     if (data == null) {
       console.log("Não encontrado!")
     } else {
       let dados = Object.values(data)
-      this.setState({ comic: dados })
+      let pag = ({ comic: dados })
+      return pag
     }
   })
 }
+
+
+
+function GetNome() {
+  firebase.database().ref("comic").once('value', snapshot =>{
+    let data  = snapshot.val();
+    if(data == null){
+      alert("Não encontrado!")
+    }
+    else{
+      let dados = Object.values(data)
+      this.setState({ notebooks: dados})
+    }
+  })
+}
+
+
 
 function Apagar() {
   firebase.database().ref('/comic').remove();
@@ -27,9 +46,9 @@ function Apagar() {
 function Salvar(n, p) {
   firebase.database().ref('/comic').push ({
     nome: n,
-    pag: p,
+    pag: p
   })
-    alert("Salvo!")
+    alert("Salvo")
 }
 
 
@@ -43,7 +62,7 @@ function Index({ navigation }) {
           <Text style={styles.text_btn}>COMEÇAR</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.btn_home} onPress={() => navigation.navigate('UM SONHO SEM NOME')} >
-          <Text style={styles.text_btn}>COMEÇAR</Text>
+          <Text style={styles.text_btn}>CONTINUAR</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>  
@@ -51,6 +70,7 @@ function Index({ navigation }) {
 }
 
 function Page001({ navigation }){
+  
   return (
     <ScrollView style={styles.container}>
       <View style={styles.container}>
@@ -60,20 +80,20 @@ function Page001({ navigation }){
         <Text style={styles.text}>Decida um novo nome pra você.</Text>
         <TextInput style={styles.input} />
         <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Página 2')} >
-          <Text>Acordar</Text>
+          <Text style={styles.text_btn}>Acordar</Text>
         </TouchableOpacity>
         <View style={styles.btn_container}>
           <TouchableOpacity style={styles.btn_page} onPress={() => navigation.navigate('Home')} >
-            <Text>voltar</Text>
+            <Text style={styles.text_btn_tiny}>voltar</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.btn_page} onPress={() => navigation.navigate('Página 1')} >
-            <Text>ir pro início</Text>
+            <Text style={styles.text_btn_tiny}>ir pro início</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.btn_page} onPress={() => Apagar() + Salvar('nameless', 1)} >
-            <Text>salvar</Text>
+            <Text style={styles.text_btn_tiny}>salvar</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.btn_page} onPress={() => Apagar()} >
-            <Text>deletar</Text>
+          <TouchableOpacity style={styles.btn_page} onPress={() => Apagar() + alert("Apagado")} >
+            <Text style={styles.text_btn_tiny}>deletar</Text>
           </TouchableOpacity>
           </View>
       </View>
@@ -87,18 +107,24 @@ function Page002({ navigation }){
       <View style={styles.container}>
         <Text style={styles.title}>Acordar</Text>
         <Image source={require('./assets/comic/page002.png')} style={styles.image} />
-        <Text style={styles.text}>Seu nome é Misaki</Text>
+        <Text style={styles.text}>Seu nome é</Text>
         <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Página 2')} >
-          <Text>proximo</Text>
+          <Text style={styles.text_btn}>Proximo</Text>
         </TouchableOpacity>
         <View style={styles.btn_container}>
           <TouchableOpacity style={styles.btn_page} onPress={() => navigation.navigate('Página 1')} >
-            <Text>voltar</Text>
+            <Text style={styles.text_btn_tiny}>voltar</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.btn_page} onPress={() => navigation.navigate('Página 1')} >
-            <Text>ir pro início</Text>
+            <Text style={styles.text_btn_tiny}>ir pro início</Text>
           </TouchableOpacity>
-        </View>
+          <TouchableOpacity style={styles.btn_page} onPress={() => Apagar() + Salvar('nameless', 2)} >
+            <Text style={styles.text_btn_tiny}>salvar</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.btn_page} onPress={() => Apagar() + alert("Apagado")} >
+            <Text style={styles.text_btn_tiny}>deletar</Text>
+          </TouchableOpacity>
+          </View>
       </View>
     </ScrollView>  
   )
@@ -146,7 +172,7 @@ function Creditos() {
     <View style={styles.container}>
       <Text style={styles.title}>Créditos</Text>
       <Image source={require('./assets/misc/gustavo.jpg')} style={styles.image_credits} />
-      <Text style={styles.title}>Gustavo Yuri Nishi</Text>
+      <Text style={styles.title_credits}>Gustavo Yuri Nishi</Text>
       <Text style={styles.text}>História, arte e programação</Text>
     </View>
   )
@@ -243,7 +269,13 @@ const styles = StyleSheet.create({
   title:{
     fontSize: 30,
     fontWeight: "bold",
-    paddingBottom: 20
+    paddingBottom: 20,
+    fontFamily: 'GohuFont'
+  },
+  title_credits:{
+    fontSize: 30,
+    fontWeight: "bold",
+    fontFamily: 'GohuFont'
   },
   btn: { 
     backgroundColor:'#F08400', 
@@ -267,11 +299,18 @@ const styles = StyleSheet.create({
   },
   text: {
     padding: 10,
-    textAlign: 'center'
+    textAlign: 'center',
+    fontFamily: 'GohuFont'
   },
   text_btn: {
     fontSize: 25,
     textAlign: 'center',
+    fontFamily: 'GohuFont'
+  },
+  text_btn_tiny: {
+    fontSize: 12,
+    textAlign: 'center',
+    fontFamily: 'GohuFont'
   },
   image: {
     width: 300,
@@ -281,13 +320,15 @@ const styles = StyleSheet.create({
   image_credits:{
     width: 150,
     height: 150,
+    marginBottom: 10
   },
   input: {  
     borderWidth: 1, 
     borderRadius: 3, 
     padding: 8, 
     width: 150,
-    backgroundColor: '#FFFFFF'
+    backgroundColor: '#FFFFFF',
+    fontFamily: 'GohuFont'
   }
 });
 
