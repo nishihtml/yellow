@@ -22,17 +22,15 @@ function GetPagina() {
   })
 }
 
-
-
 function GetNome() {
-  firebase.database().ref("comic").once('value', snapshot =>{
+  firebase.database().ref("comic").child('nome').on('value', snapshot =>{
     let data  = snapshot.val();
     if(data == null){
       alert("Não encontrado!")
     }
     else{
       let dados = Object.values(data)
-      this.setState({ notebooks: dados})
+      return dados
     }
   })
 }
@@ -107,7 +105,7 @@ function Page002({ navigation }){
       <View style={styles.container}>
         <Text style={styles.title}>Acordar</Text>
         <Image source={require('./assets/comic/page002.png')} style={styles.image} />
-        <Text style={styles.text}>Seu nome é</Text>
+        <Text style={styles.text}>Seu nome é {GetNome()}</Text>
         <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Página 2')} >
           <Text style={styles.text_btn}>Proximo</Text>
         </TouchableOpacity>
@@ -153,9 +151,16 @@ function Test(){
 
 function Paginas() {
   return (
-    <View style={styles.container}>
-      <Text>a</Text>
-    </View>
+    <ScrollView style={styles.container}>
+      <View style={styles.container}>
+        <TouchableOpacity style={styles.btn_list} onPress={() => navigation.navigate('UM SONHO SEM NOME', { screen: 'Página 1' })} >
+            <Text style={styles.text_btn_tiny}>001 - UM SONHO SEM NOME</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.btn_list} onPress={() => navigation.navigate('UM SONHO SEM NOME', { screen: 'Página 2' })} >
+            <Text style={styles.text_btn_tiny}>002 - Acordar</Text>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
   )
 }
 
@@ -260,7 +265,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#F8BD2D',
-    padding: 8,
+    padding: 5,
     textAlign: 'center'
   },
   btn_container:{
@@ -283,6 +288,14 @@ const styles = StyleSheet.create({
     borderRadius:8,  
     alignSelf: 'flex-end',
     margin: 10 
+  },
+  btn_list: { 
+    backgroundColor:'#F08400', 
+    padding: 10, 
+    borderRadius:8,  
+    alignSelf: 'center',
+    margin: 4,
+    width: 300,
   },
   btn_page: {
     backgroundColor:'#F08400', 
