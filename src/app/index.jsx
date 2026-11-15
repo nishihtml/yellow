@@ -5,9 +5,24 @@ import { Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View 
 import firebase from './config/config.js';
 //import { Card, Paragraph } from 'react-native-paper';
 
-
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
+
+function GetPage() {
+  firebase.database().ref("notebooks").orderByChild("pag").once('value', snapshot => {
+    let data = snapshot.val();
+    if (data == null) {
+      console.log("Não encontrado!")
+    } else {
+      let dados = Object.values(data)
+      this.setState({ comic: dados })
+    }
+  })
+}
+
+function Apagar() {
+  firebase.database().ref('/comic').remove();
+}
 
 function Salvar(n, p) {
   firebase.database().ref('/comic').push ({
@@ -17,12 +32,16 @@ function Salvar(n, p) {
     alert("Salvo!")
 }
 
+
 function Index({ navigation }) {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.container}>
         <Text style={styles.title}>UM SONHO SEM NOME</Text>
         <Image source={require('./assets/comic/page001.png')} style={styles.image} />
+        <TouchableOpacity style={styles.btn_home} onPress={() => navigation.navigate('UM SONHO SEM NOME', { screen: 'Página 1' })} >
+          <Text style={styles.text_btn}>COMEÇAR</Text>
+        </TouchableOpacity>
         <TouchableOpacity style={styles.btn_home} onPress={() => navigation.navigate('UM SONHO SEM NOME')} >
           <Text style={styles.text_btn}>COMEÇAR</Text>
         </TouchableOpacity>
@@ -50,7 +69,13 @@ function Page001({ navigation }){
           <TouchableOpacity style={styles.btn_page} onPress={() => navigation.navigate('Página 1')} >
             <Text>ir pro início</Text>
           </TouchableOpacity>
-        </View>
+          <TouchableOpacity style={styles.btn_page} onPress={() => Apagar() + Salvar('nameless', 1)} >
+            <Text>salvar</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.btn_page} onPress={() => Apagar()} >
+            <Text>deletar</Text>
+          </TouchableOpacity>
+          </View>
       </View>
     </ScrollView>
   )
@@ -85,6 +110,45 @@ function UmSonhoSemNome(){
       <Stack.Screen name="Página 1" component={Page001} options={{ headerShown: false }}/>
       <Stack.Screen name="Página 2" component={Page002} options={{ headerShown: false }}/>
     </Stack.Navigator>
+  )
+}
+
+
+
+function Test(){
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Test_1" component={Test_1} options={{ headerShown: false }}/>
+      <Stack.Screen name="Test_2" component={Test_2} options={{ headerShown: false }}/>
+      <Stack.Screen name="Test_3" component={Test_3} options={{ headerShown: false }}/>
+    </Stack.Navigator>
+  )
+}
+
+function Paginas() {
+  return (
+    <View style={styles.container}>
+      <Text>a</Text>
+    </View>
+  )
+}
+
+function Galeria() {
+  return (
+    <View style={styles.container}>
+      <Text>a</Text>
+    </View>
+  )
+}
+
+function Creditos() {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Créditos</Text>
+      <Image source={require('./assets/misc/gustavo.jpg')} style={styles.image_credits} />
+      <Text style={styles.title}>Gustavo Yuri Nishi</Text>
+      <Text style={styles.text}>História, arte e programação</Text>
+    </View>
   )
 }
 
@@ -134,7 +198,7 @@ function Test_3({ navigation }){
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Teste</Text>
-      <Image source={require('./../../assets/test/test_3.gif')} style={styles.image} />
+      <Image source={require('./assets/test/test_3.gif')} style={styles.image} />
       <Text style={styles.text}>Eles amam platonicamente um do outro.</Text>
       <Text style={styles.text}>Fim</Text>
       <View style={styles.btn_container}>
@@ -149,42 +213,6 @@ function Test_3({ navigation }){
   )
 }
 
-function Test(){
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Test_1" component={Test_1} options={{ headerShown: false }}/>
-      <Stack.Screen name="Test_2" component={Test_2} options={{ headerShown: false }}/>
-      <Stack.Screen name="Test_3" component={Test_3} options={{ headerShown: false }}/>
-    </Stack.Navigator>
-  )
-}
-
-function Creditos() {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Créditos</Text>
-      <Image source={require('./assets/misc/gustavo.jpg')} style={styles.image} />
-      <Text>Gustavo Yuri Nishi</Text>
-    </View>
-  )
-}
-
-function Paginas() {
-  return (
-    <View style={styles.container}>
-      <Text>a</Text>
-    </View>
-  )
-}
-
-function Galeria() {
-  return (
-    <View style={styles.container}>
-      <Text>a</Text>
-    </View>
-  )
-}
-
 function App() {
   return (
     <NavigationContainer>
@@ -192,8 +220,8 @@ function App() {
         <Drawer.Screen name="Home" component={Index} />
         <Drawer.Screen name="UM SONHO SEM NOME" component={UmSonhoSemNome} />
         <Drawer.Screen name="Páginas" component={Paginas} /> 
-        <Drawer.Screen name="Créditos" component={Creditos} /> 
         <Drawer.Screen name="Galeria" component={Galeria} /> 
+        <Drawer.Screen name="Créditos" component={Creditos} /> 
         <Drawer.Screen name="Teste" component={Test} />      
       </Drawer.Navigator>
     </NavigationContainer>
@@ -208,13 +236,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#F8BD2D',
     padding: 8,
     textAlign: 'center'
-  },
-  scroll: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: "100%",
-    backgroundColor:'#F8BD2D', 
   },
   btn_container:{
     flexDirection: 'row'
@@ -256,6 +277,10 @@ const styles = StyleSheet.create({
     width: 300,
     height: 225,
     marginBottom: 10
+  },
+  image_credits:{
+    width: 150,
+    height: 150,
   },
   input: {  
     borderWidth: 1, 
