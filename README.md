@@ -84,4 +84,4 @@ Mesmo dessas dificuldades, eu espero que no futuro eu possa utilizar esse framew
 
 ## Links
 Repositório no GitHub: [https://github.com/nishihtml/yellow](https://github.com/nishihtml/yellow)
-Snack.Expo: [https://github.com/nishihtml/yellow](https://snack.expo.dev/@nishijsx/um-sonho-sem-nome?platform=web)
+Expo Snack: [https://github.com/nishihtml/yellow](https://snack.expo.dev/@nishijsx/um-sonho-sem-nome?platform=web)
