@@ -6,7 +6,7 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
-    'GohuFont': require('../assets/fonts/GohuFont11NerdFontPropo-Regular.ttf')
+    'GohuFont': require('./../../assets/fonts/GohuFontuni11NerdFontMono-Regular.ttf')
   });
 
   useEffect(() => {

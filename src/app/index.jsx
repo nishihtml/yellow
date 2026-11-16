@@ -1,6 +1,7 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { getDatabase, onValue, ref } from "firebase/database";
 import { useState } from 'react';
 import { Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import './components/font.js';
@@ -8,31 +9,24 @@ import firebase from './config/config.js';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
+let protag = 'Misaki'
 
 function GetPagina() {
-  firebase.database().ref("comic").once('value', snapshot => {
-    let data = snapshot.val();
-    if (data == null) {
-      console.log("Não encontrado!")
-    } else {
-      let dados = Object.values(data)
-      let pag = ({ comic: dados })
-      return pag
-    }
-  })
+  const db = getDatabase();
+  const starCountRef = ref(db, 'comic/' + id + '/pag');
+  onValue(starCountRef, (snapshot) => {
+    const data = snapshot.val();
+    return data
+  });
 }
 
 function GetNome() {
-  firebase.database().ref("comic").child('nome').on('value', snapshot =>{
-    let data  = snapshot.val();
-    if(data == null){
-      alert("Não encontrado!")
-    }
-    else{
-      let dados = Object.values(data)
-      return dados
-    }
-  })
+  const db = getDatabase();
+  const starCountRef = ref(db, 'comic' + id + '/nome');
+  onValue(starCountRef, (snapshot) => {
+    const data = snapshot.val();
+    return data
+  });
 }
 
 function Apagar() {
@@ -75,7 +69,7 @@ function Page001({ navigation }){
         <Text style={styles.text}>Você é uma garota dormindo em seu quarto. Apesar de ter 15 anos, você ainda não tem um nome.</Text>
         <Text style={styles.text}>Decida um novo nome pra você.</Text>
         <TextInput style={styles.input} onChangeText={setNome}/>
-        <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Página 2')} >
+        <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Página 2') + setNome(nome)} >
           <Text style={styles.text_btn}>Acordar</Text>
         </TouchableOpacity>
         <View style={styles.btn_container}>
@@ -98,13 +92,12 @@ function Page001({ navigation }){
 }
 
 function Page002({ navigation }){
-  
   return (
     <ScrollView style={styles.container}>
       <View style={styles.container}>
         <Text style={styles.title}>Acordar</Text>
         <Image source={require('./assets/comic/page002.png')} style={styles.image} />
-        <Text style={styles.text}>Seu nome é {GetNome()}</Text>
+        <Text style={styles.text}>Seu nome é {protag}</Text>
         <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Página 3')} >
           <Text style={styles.text_btn}>Proximo</Text>
         </TouchableOpacity>
