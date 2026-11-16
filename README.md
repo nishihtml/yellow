@@ -1,56 +1,83 @@
-# Welcome to your Expo app 👋
+# Um Sonho Sem Nome
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Visão Geral
+Este projeto consiste em uma webcomic, ou um quadrinho online, estruturado em React-Native que tem propositos em entreterimento
 
-## Get started
+## Requisitos
+- Mínimo de 6 telas distintas
+- Uso React Navigation (stack, tab ou drawer)
+- Implementação de imagens
+- Aplicar Estilo e UX
+  - Layout orgabnizado
+  - Alinhamento Consistente
+  - Espaçamento adequado entre elementos
+  - Feedback ao usuário
+- Implementação do Firebase (banco de dados)
+  - Salvar
+  - Recuperar
+  - Atualizar
+  - Remover
+- Uso de atuatores
 
-1. Install dependencies
+## Dependências Usadas
 
-   ```bash
-   npm install
-   ```
+### React-Native
+Framework do projeto
 
-2. Start the app
+### React 
+Uso de useState para variaveis e useEffect para executar funções quando uma tela é montada
 
-   ```bash
-   npx expo start
-   ```
+### Firebase
+Banco de dados
 
-In the output, you'll find options to open the app in a
+### @react-navigation/native
+Navegações entre telas
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+### @react-navigation/stack
+Navegar telas dentro de telas
 
-You can start developing by editing the files inside the **src/app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+### @react-navigation/drawer
+Navegar telas em um menu lateral
 
-## Get a fresh project
+### @expo-font & expo-splash-screen
+expo-font permite o uso de fontes costumizadas enquanto expo-splash-screen me permitiu esconder a tela de splash
 
-When you're ready, run:
+Referência usada: https://docs.expo.dev/develop/user-interface/fonts/
 
-```bash
-npm run reset-project
-```
+## Funcionalidades
 
-This command will move the starter code to the **example** directory and create a blank **src/app** directory where you can start developing.
+### Proximo
+Move para a proxima página do quadrinho
 
-### Other setup steps
+![test1](./../../assets/misc/test1.gif)
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+### Voltar
+Move para a página anterior do quadrinho (caso estiver na primeira página do quadrinho, volta para a tela de home)
 
-## Learn more
+![test2](./../../assets/misc/test2.gif)
 
-To learn more about developing your project with Expo, look at the following resources:
+### Ir pro inicio
+Move para a primeira página do quadrinho
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+![test3](./../../assets/misc/test3.gif)
 
-## Join the community
+### Salvar
+Cria ou substitui dados do quadrinho (o nome da personagem e a onde que parou no quadrinho)
 
-Join our community of developers creating universal apps.
+### Deletar
+Deleta os dados do quadrinho
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## Instalação e Execução
+- Abrir o projeto por meio do terminal
+- "npm start" ou "npx expo start"
+
+## Minha Experiência
+Trabalhar com react-native não foi muito diferente que fazer projetos em html mas desta vez é mais simples de programar em JavaScript. 
+
+O meu tema do projeto não é algo que revoluciona ou contribuiu de uma maneira direta mas é algo único que pensei em fazer entre as pessoas que estavam fazendo os seus projetos.
+
+Uma das maiores dificuldades foi tentar utilizar dados que estavam armazenados no banco de dados do Firebase com intuito de utilizar esses dados como variáveis.
+
+Uma outra dificuldade foi tentar realizar este projeto no editor de código VSCode pois dava erros complexos de web build e na utilização de depêndencias, tanto que optei por usar Snack para o desenvolvimento do meu projeto.
+
+Mesmo dessas dificuldades, eu espero que no futuro eu possa utilizar esse framework para projetos futuros e aprender melhor o react-native para minha vida profissional.
