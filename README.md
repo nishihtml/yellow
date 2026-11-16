@@ -24,9 +24,6 @@ Este projeto consiste em uma webcomic, ou um quadrinho online, estruturado em Re
 ### React-Native
 Framework do projeto
 
-### React 
-Uso de useState para variaveis e useEffect para executar funções quando uma tela é montada
-
 ### Firebase
 Banco de dados
 
