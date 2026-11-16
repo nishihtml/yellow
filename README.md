@@ -81,3 +81,7 @@ Uma das maiores dificuldades foi tentar utilizar dados que estavam armazenados n
 Uma outra dificuldade foi tentar realizar este projeto no editor de código VSCode pois dava erros complexos de web build e na utilização de depêndencias, tanto que optei por usar Snack para o desenvolvimento do meu projeto.
 
 Mesmo dessas dificuldades, eu espero que no futuro eu possa utilizar esse framework para projetos futuros e aprender melhor o react-native para minha vida profissional.
+
+## Links
+Repositório no GitHub: [https://github.com/nishihtml/yellow](https://github.com/nishihtml/yellow)
+Snack.Expo: [https://github.com/nishihtml/yellow](https://snack.expo.dev/@nishijsx/um-sonho-sem-nome?platform=web)
