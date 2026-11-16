@@ -3,13 +3,14 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { getDatabase, onValue, ref } from "firebase/database";
 import { useState } from 'react';
-import { Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, Vibration, View } from 'react-native';
 import './components/font.js';
 import firebase from './config/config.js';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 let protag = 'Misaki'
+
 
 function GetPagina() {
   const db = getDatabase();
@@ -31,6 +32,8 @@ function GetNome() {
 
 function Apagar() {
   firebase.database().ref('/comic').remove();
+  Vibration.vibrate(1000)
+  alert("Deletado")
 }
 
 function Salvar(n, p) {
@@ -38,6 +41,7 @@ function Salvar(n, p) {
     nome: n,
     pag: p
   })
+    Vibration.vibrate(1000)
     alert("Salvo")
 }
 
@@ -82,7 +86,7 @@ function Page001({ navigation }){
           <TouchableOpacity style={styles.btn_page} onPress={() => Apagar() + Salvar(nome, 1)} >
             <Text style={styles.text_btn_tiny}>salvar</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.btn_page} onPress={() => Apagar() + alert("Apagado")} >
+          <TouchableOpacity style={styles.btn_page} onPress={() => Apagar()} >
             <Text style={styles.text_btn_tiny}>deletar</Text>
           </TouchableOpacity>
           </View>
@@ -92,6 +96,7 @@ function Page001({ navigation }){
 }
 
 function Page002({ navigation }){
+  
   return (
     <ScrollView style={styles.container}>
       <View style={styles.container}>
@@ -111,7 +116,7 @@ function Page002({ navigation }){
           <TouchableOpacity style={styles.btn_page} onPress={() => Apagar() + Salvar('nameless', 2)} >
             <Text style={styles.text_btn_tiny}>salvar</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.btn_page} onPress={() => Apagar() + alert("Apagado")} >
+          <TouchableOpacity style={styles.btn_page} onPress={() => Apagar()} >
             <Text style={styles.text_btn_tiny}>deletar</Text>
           </TouchableOpacity>
           </View>
@@ -138,7 +143,7 @@ function Page003({ navigation }){
           <TouchableOpacity style={styles.btn_page} onPress={() => Apagar() + Salvar('nameless', 3)} >
             <Text style={styles.text_btn_tiny}>salvar</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.btn_page} onPress={() => Apagar() + alert("Apagado")} >
+          <TouchableOpacity style={styles.btn_page} onPress={() => Apagar()} >
             <Text style={styles.text_btn_tiny}>deletar</Text>
           </TouchableOpacity>
           </View>
@@ -167,7 +172,7 @@ function Page004({ navigation }){
           <TouchableOpacity style={styles.btn_page} onPress={() => Apagar() + Salvar('nameless', 4)} >
             <Text style={styles.text_btn_tiny}>salvar</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.btn_page} onPress={() => Apagar() + alert("Apagado")} >
+          <TouchableOpacity style={styles.btn_page} onPress={() => Apagar()} >
             <Text style={styles.text_btn_tiny}>deletar</Text>
           </TouchableOpacity>
           </View>
@@ -196,7 +201,7 @@ function Page005({ navigation }){
           <TouchableOpacity style={styles.btn_page} onPress={() => Apagar() + Salvar('nameless', 5)} >
             <Text style={styles.text_btn_tiny}>salvar</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.btn_page} onPress={() => Apagar() + alert("Apagado")} >
+          <TouchableOpacity style={styles.btn_page} onPress={() => Apagar()} >
             <Text style={styles.text_btn_tiny}>deletar</Text>
           </TouchableOpacity>
           </View>
@@ -225,7 +230,7 @@ function Page006({ navigation }){
           <TouchableOpacity style={styles.btn_page} onPress={() => Apagar() + Salvar('nameless', 6)} >
             <Text style={styles.text_btn_tiny}>salvar</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.btn_page} onPress={() => Apagar() + alert("Apagado")} >
+          <TouchableOpacity style={styles.btn_page} onPress={() => Apagar()} >
             <Text style={styles.text_btn_tiny}>deletar</Text>
           </TouchableOpacity>
           </View>
@@ -259,7 +264,7 @@ function Page007({ navigation }){
           <TouchableOpacity style={styles.btn_page} onPress={() => Apagar() + Salvar('nameless', 7)} >
             <Text style={styles.text_btn_tiny}>salvar</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.btn_page} onPress={() => Apagar() + alert("Apagado")} >
+          <TouchableOpacity style={styles.btn_page} onPress={() => Apagar()} >
             <Text style={styles.text_btn_tiny}>deletar</Text>
           </TouchableOpacity>
           </View>
@@ -289,7 +294,7 @@ function Page008({ navigation }){
           <TouchableOpacity style={styles.btn_page} onPress={() => Apagar() + Salvar('nameless', 8)} >
             <Text style={styles.text_btn_tiny}>salvar</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.btn_page} onPress={() => Apagar() + alert("Apagado")} >
+          <TouchableOpacity style={styles.btn_page} onPress={() => Apagar()} >
             <Text style={styles.text_btn_tiny}>deletar</Text>
           </TouchableOpacity>
           </View>
@@ -318,7 +323,7 @@ function Page009({ navigation }){
           <TouchableOpacity style={styles.btn_page} onPress={() => Apagar() + Salvar('nameless', 9)} >
             <Text style={styles.text_btn_tiny}>salvar</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.btn_page} onPress={() => Apagar() + alert("Apagado")} >
+          <TouchableOpacity style={styles.btn_page} onPress={() => Apagar()} >
             <Text style={styles.text_btn_tiny}>deletar</Text>
           </TouchableOpacity>
           </View>
@@ -347,7 +352,7 @@ function Page010({ navigation }){
           <TouchableOpacity style={styles.btn_page} onPress={() => Apagar() + Salvar('nameless', 10)} >
             <Text style={styles.text_btn_tiny}>salvar</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.btn_page} onPress={() => Apagar() + alert("Apagado")} >
+          <TouchableOpacity style={styles.btn_page} onPress={() => Apagar()} >
             <Text style={styles.text_btn_tiny}>deletar</Text>
           </TouchableOpacity>
           </View>
@@ -377,7 +382,7 @@ function Page011({ navigation }){
           <TouchableOpacity style={styles.btn_page} onPress={() => Apagar() + Salvar('nameless', 11)} >
             <Text style={styles.text_btn_tiny}>salvar</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.btn_page} onPress={() => Apagar() + alert("Apagado")} >
+          <TouchableOpacity style={styles.btn_page} onPress={() => Apagar()} >
             <Text style={styles.text_btn_tiny}>deletar</Text>
           </TouchableOpacity>
           </View>
