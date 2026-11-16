@@ -49,17 +49,17 @@ Referência usada: https://docs.expo.dev/develop/user-interface/fonts/
 ### Proximo
 Move para a proxima página do quadrinho
 
-![test1](./../../assets/misc/test1.gif)
+![test1](assets/misc/test1.gif)
 
 ### Voltar
 Move para a página anterior do quadrinho (caso estiver na primeira página do quadrinho, volta para a tela de home)
 
-![test2](./../../assets/misc/test2.gif)
+![test2](assets/misc/test2.gif)
 
 ### Ir pro inicio
 Move para a primeira página do quadrinho
 
-![test3](./../../assets/misc/test3.gif)
+![test3](assets/misc/test3.gif)
 
 ### Salvar
 Cria ou substitui dados do quadrinho (o nome da personagem e a onde que parou no quadrinho)
