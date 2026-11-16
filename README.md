@@ -42,7 +42,7 @@ Navegar telas em um menu lateral
 ### @expo-font & expo-splash-screen
 expo-font permite o uso de fontes costumizadas enquanto expo-splash-screen me permitiu esconder a tela de splash
 
-Referência usada: https://docs.expo.dev/develop/user-interface/fonts/
+Referência usada: [https://docs.expo.dev/develop/user-interface/fonts/](https://docs.expo.dev/develop/user-interface/fonts/)
 
 ## Funcionalidades
 
